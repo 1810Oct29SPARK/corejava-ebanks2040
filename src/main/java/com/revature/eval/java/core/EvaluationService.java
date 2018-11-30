@@ -1,6 +1,7 @@
 package com.revature.eval.java.core;
 
 import java.time.temporal.Temporal;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -30,8 +31,19 @@ public class EvaluationService {
 	 * @return
 	 */
 	public String acronym(String phrase) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		
+		char[] ch = new char[phrase.length()]; //makes an array of characters to inject String values
+		ch[0] = phrase.charAt(0); //grabbing the first letter 
+		for (int i = 1; i < phrase.length(); i++) { //going through every letter of phrase, grab the letter after a space
+			if (phrase.charAt(i) == ' ') {
+				ch[i] = phrase.charAt(i+1);
+				
+			}
+	
+		}	
+		
+		return new String(ch).toUpperCase().replaceAll("\\s", "");	//turned the char back into a String, got rid of empty spaces	
+	
 	}
 
 	/**
