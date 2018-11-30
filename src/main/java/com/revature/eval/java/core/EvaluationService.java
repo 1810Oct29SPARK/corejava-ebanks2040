@@ -136,8 +136,42 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int getScrabbleScore(String string) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		int p = 0;
+		for (int i = 0; i < string.length(); i++) {
+			switch (string.toUpperCase().charAt(i)) {
+				case 'A' : case 'E' : case 'I' : case 'O' : case 'U' : case 'L' : case 'N' : 
+				case 'R' : case 'S' : case 'T' :
+					p +=1;
+					break;
+					
+				case 'D' : case 'G' :
+					p+=2;
+					break;
+					
+				case 'B' : case 'C' : case 'M' : case 'P' :
+					p+=3;
+					break;
+					
+				case 'F' : case 'H' : case 'V' : case 'W' : case 'Y' :
+					p+=4;
+					break;
+					
+				case 'K' :
+					p+=5;
+					break;
+				
+				case 'J' : case 'X' :
+					p+=8;
+					break; 
+					
+				case 'Q' : case 'Z' :
+					p+=10;
+					break;
+				
+				default : System.out.println("not a letter");
+				break;
+			}
+		} return p;
 	}
 
 	/**
@@ -171,9 +205,14 @@ public class EvaluationService {
 	 * Note: As this exercise only deals with telephone numbers used in
 	 * NANP-countries, only 1 is considered a valid country code.
 	 */
-	public String cleanPhoneNumber(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+	public String cleanPhoneNumber(String string)  {
+		string.replace("\\s", ""); // \\s is empty spaces
+		string.replace("[^\\d.]", ""); // whatever that is removes everything that isn't a number
+		if (string.charAt(0) == '1') { //replacing 1 at the beginning with empty space
+			string = string.replaceFirst("1","");
+		}
+		
+		return string;
 	}
 
 	/**
