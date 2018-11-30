@@ -14,6 +14,10 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
+	public static void main (String[] noargs) {
+		 
+		System.out.println(acronym("Dick Butt Dick"));
+	}
 	public String reverse(String string) {
 		char[] reversed = new char[string.length()];
 		for (int i = reversed.length - 1, j=0; i >= 0; i--, j++) {
@@ -30,14 +34,14 @@ public class EvaluationService {
 	 * @param phrase
 	 * @return
 	 */
-	public String acronym(String phrase) {
-		
+	public static String acronym(String phrase) {
+		int j = 1; //new imaginary int, adds 1 to every correct character 
 		char[] ch = new char[phrase.length()]; //makes an array of characters to inject String values
 		ch[0] = phrase.charAt(0); //grabbing the first letter 
 		for (int i = 1; i < phrase.length(); i++) { //going through every letter of phrase, grab the letter after a space
 			if (phrase.charAt(i) == ' ') {
-				ch[i] = phrase.charAt(i+1);
-				
+				ch[j] = phrase.charAt(i+1);
+				j++;
 			}
 	
 		}	
@@ -96,21 +100,25 @@ public class EvaluationService {
 		}
 
 		public boolean isEquilateral() {
-			// TODO Write an implementation for this method declaration
+			if (sideOne == sideTwo && sideOne == sideThree && sideTwo == sideThree) {
+				return true;
+			}
 			return false;
 		}
 
 		public boolean isIsosceles() {
-			// TODO Write an implementation for this method declaration
+			if (sideOne == sideTwo && sideTwo != sideThree || sideTwo == sideThree && sideThree != sideOne || sideThree == sideOne && sideOne != sideTwo) {
+				return true;
+			}
 			return false;
 		}
 
 		public boolean isScalene() {
-			// TODO Write an implementation for this method declaration
+			if (sideOne != sideTwo && sideOne != sideThree && sideTwo != sideThree) {
+				return true;
+			}
 			return false;
 		}
-
-	}
 
 	/**
 	 * 4. Given a word, compute the scrabble score for that word.
