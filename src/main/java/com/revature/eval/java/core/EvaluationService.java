@@ -4,6 +4,7 @@ import java.time.temporal.Temporal;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class EvaluationService {
 
@@ -225,9 +226,28 @@ public class EvaluationService {
 	 * @return
 	 */
 	public Map<String, Integer> wordCount(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		
+			
+		
+		Map<String, Integer> wordCount =  new TreeMap<String, Integer>(); 
+		
+		String[]splits = string.split("[ , ]");
+		for (int i = 0; i < splits.length; i++) {
+
+			Integer d = wordCount.get(splits[i]); 
+			if (wordCount.get(splits[i]) == null) {
+				wordCount.put(splits[i], 1);
+			} else {
+				wordCount.put(splits[i],++d);
+				
+			}
+			
+		} System.out.println(wordCount);
+		return wordCount;
 	}
+		
+		
+
 
 	/**
 	 * 7. Implement a binary search algorithm.
@@ -373,14 +393,53 @@ public class EvaluationService {
 	static class RotationalCipher {
 		private int key;
 
+
 		public RotationalCipher(int key) {
 			super();
 			this.key = key;
+			//this if statement checks if its within the alphabet
+			if(key>26) {
+				key = key%26;
+			} else if (key<0) 
+				key = (key%26)+26;
 		}
 
 		public String rotate(String string) {
-			// TODO Write an implementation for this method declaration
-			return null;
+			
+			//changing the string into chars 
+			String cipherText = "";
+			int length = string.length();
+			for (int i = 0; i<length; i++) {
+				char ch = string.charAt(i);
+
+				//checks if input is letters
+				if(Character.isLetter(ch) || Character.isWhitespace(ch)) {
+					//casting to char
+					char c = (char)(ch+key);
+					//checks if out of bounds ascii, using 26 bc size of the alphabet
+					if(c > 'z') {
+						cipherText += (char)(ch - (26-key));
+					} else {
+						cipherText += c;
+					}
+					
+					//checks if uppercase
+				} else if (Character.isUpperCase(ch)) {
+					//casting to char
+					char c = (char)(ch+key);
+					//checks if out of bounds ascii
+					if(c > 'Z') {
+						cipherText += (char)(ch - (26-key));
+					} else {
+						cipherText += c;
+				}
+				
+			} else {
+				cipherText += ch;
+			}
+		}
+		}
+			return string;
 		}
 
 	}
