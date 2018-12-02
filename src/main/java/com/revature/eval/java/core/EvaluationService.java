@@ -1,10 +1,13 @@
 package com.revature.eval.java.core;
 
+import java.lang.reflect.Array;
 import java.time.temporal.Temporal;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+
 
 public class EvaluationService {
 
@@ -15,11 +18,8 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
-	public static void main (String[] noargs) {
-		 
-		System.out.println(acronym("Dick Butt Dick"));
-	}
-	public String reverse(String string) {
+
+	public static String reverse(String string) {
 		char[] reversed = new char[string.length()];
 		for (int i = reversed.length - 1, j=0; i >= 0; i--, j++) {
 			reversed[j] = string.charAt(i);
@@ -36,19 +36,20 @@ public class EvaluationService {
 	 * @return
 	 */
 	public static String acronym(String phrase) {
-		int j = 1; //new imaginary int, adds 1 to every correct character 
-		char[] ch = new char[phrase.length()]; //makes an array of characters to inject String values
-		ch[0] = phrase.charAt(0); //grabbing the first letter 
-		for (int i = 1; i < phrase.length(); i++) { //going through every letter of phrase, grab the letter after a space
-			if (phrase.charAt(i) == ' ') {
-				ch[j] = phrase.charAt(i+1);
-				j++;
-			}
-	
-		}	
-		
-		return new String(ch).toUpperCase().replaceAll("\\s", "");	//turned the char back into a String, got rid of empty spaces	
-	
+		// TODO Write an implementation for this method declaration
+		char[] ch = new char[phrase.length()];
+		String acro = " ";		
+		ch[0] = phrase.charAt(0);
+		for(int i = 1; i < phrase.length(); i++)
+		{		  	
+		 if (phrase.charAt(i) == ' ')
+		 {
+			 ch[i] = phrase.charAt(i + 1);
+		 }
+		}
+		//System.out.println(ch);
+
+		return acro;
 	}
 
 	/**
@@ -60,6 +61,8 @@ public class EvaluationService {
 	 * different lengths.
 	 *
 	 */
+	
+	//Checked
 	static class Triangle {
 		private double sideOne;
 		private double sideTwo;
@@ -120,7 +123,7 @@ public class EvaluationService {
 			}
 			return false;
 		}
-
+	}
 	/**
 	 * 4. Given a word, compute the scrabble score for that word.
 	 * 
@@ -136,7 +139,8 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
-	public int getScrabbleScore(String string) {
+	//Checked
+	public static int getScrabbleScore(String string) {
 		int p = 0;
 		for (int i = 0; i < string.length(); i++) {
 			switch (string.toUpperCase().charAt(i)) {
@@ -205,14 +209,26 @@ public class EvaluationService {
 	 * 
 	 * Note: As this exercise only deals with telephone numbers used in
 	 * NANP-countries, only 1 is considered a valid country code.
+	 * @throws Exception 
 	 */
-	public String cleanPhoneNumber(String string)  {
-		string.replace("\\s", ""); // \\s is empty spaces
-		string.replace("[^\\d.]", ""); // whatever that is removes everything that isn't a number
-		if (string.charAt(0) == '1') { //replacing 1 at the beginning with empty space
-			string = string.replaceFirst("1","");
-		}
-		
+	public static String cleanPhoneNumber(String string) {
+
+			if(string.length() != 11)
+			{
+				
+			}
+			for(int i = 0; i < string.length();i++)
+			{
+				
+			}
+			string = string.replaceAll("\\s","");
+			string = string.replaceAll("[^\\d.]", "");
+			if(string.charAt(0) == '1')
+			string = string.replaceFirst("1", "");
+			
+			//Do some research on throws and use that throw thing
+			//Santize for when user inputs more than the
+			System.out.println(string);
 		return string;
 	}
 
@@ -225,9 +241,8 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
+	//Checked
 	public Map<String, Integer> wordCount(String string) {
-		
-			
 		
 		Map<String, Integer> wordCount =  new TreeMap<String, Integer>(); 
 		
@@ -246,9 +261,6 @@ public class EvaluationService {
 		return wordCount;
 	}
 		
-		
-
-
 	/**
 	 * 7. Implement a binary search algorithm.
 	 * 
@@ -324,9 +336,35 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
-	public String toPigLatin(String string) {
+	public static String toPigLatin(String string) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		char[] pigLatin = new char[string.length() + 2];
+		
+		String[] piggys = string.split(" ");
+		for(int i =0; i <piggys.length;i++)
+		{
+			int j = 0;
+			while(j<piggys[i].length())
+			{
+				if(piggys[i].charAt(j) == 'a')
+				{
+					
+				}
+				else
+				{
+					if(true) {
+						
+					}
+					else {
+						
+					}
+				}
+			}
+		}			
+		pigLatin[string.length()] = 'a';
+		pigLatin[string.length() + 1] = 'y';
+		System.out.println(new String(pigLatin));
+		return new String(pigLatin);
 	}
 
 	/**
@@ -344,11 +382,26 @@ public class EvaluationService {
 	 * @param input
 	 * @return
 	 */
-	public boolean isArmstrongNumber(int input) {
-		// TODO Write an implementation for this method declaration
-		return false;
-	}
+	//Checked
+	public static boolean isArmstrongNumber(int input) {
+	    String number = String.valueOf(input);
+	    char[] numDigits = number.toCharArray();
 
+	    int output = 0;
+	    int power = numDigits.length;
+
+	    for (int i = 0; i < numDigits.length; i++) {
+	        int digit = Character.digit(numDigits[i], 10);
+	        output = output + (int) Math.pow(digit, power);
+	    }
+
+	    if (output == input) {
+	        return true;
+	    } else {
+	        return false;
+	    }
+	}
+		
 	/**
 	 * 10. Compute the prime factors of a given natural number.
 	 * 
@@ -359,9 +412,19 @@ public class EvaluationService {
 	 * @param l
 	 * @return
 	 */
-	public List<Long> calculatePrimeFactorsOf(long l) {
-		// TODO Write an implementation for this method declaration
-		return null;
+	//Checked
+	public static List<Long> calculatePrimeFactorsOf(long l) {
+		List<Long> primes= new ArrayList<Long>();
+		long number = 0;
+		for(long i = 2; i < number; i++)
+		{
+			while(number % i == 0)
+			{				
+				primes.add(number);
+				number = number/i;
+			}
+		}
+		return primes;
 	}
 
 	/**
@@ -390,6 +453,7 @@ public class EvaluationService {
 	 * gur ynml qbt. ROT13 Gur dhvpx oebja sbk whzcf bire gur ynml qbt. gives The
 	 * quick brown fox jumps over the lazy dog.
 	 */
+	//Checked
 	static class RotationalCipher {
 		private int key;
 
@@ -397,6 +461,7 @@ public class EvaluationService {
 		public RotationalCipher(int key) {
 			super();
 			this.key = key;
+			
 			//this if statement checks if its within the alphabet
 			if(key>26) {
 				key = key%26;
@@ -406,22 +471,27 @@ public class EvaluationService {
 
 		public String rotate(String string) {
 			
-			//changing the string into chars 
 			String cipherText = "";
 			int length = string.length();
+			
+			//changing the string into chars 
 			for (int i = 0; i<length; i++) {
 				char ch = string.charAt(i);
 
 				//checks if input is letters
 				if(Character.isLetter(ch) || Character.isWhitespace(ch)) {
+					
+					//checks if lowercase
+					if(Character.isLowerCase(ch)) {
 					//casting to char
 					char c = (char)(ch+key);
-					//checks if out of bounds ascii, using 26 bc size of the alphabet
+					//checks if out of bounds ascii
 					if(c > 'z') {
 						cipherText += (char)(ch - (26-key));
 					} else {
 						cipherText += c;
 					}
+
 					
 					//checks if uppercase
 				} else if (Character.isUpperCase(ch)) {
@@ -438,10 +508,12 @@ public class EvaluationService {
 				cipherText += ch;
 			}
 		}
-		}
+	
 			return string;
-		}
+	
+		} return string;
 
+	}
 	}
 
 	/**
@@ -494,10 +566,8 @@ public class EvaluationService {
 		 * @return
 		 */
 		public static String encode(String string) {
-			// TODO Write an implementation for this method declaration
 			return null;
 		}
-
 		/**
 		 * Question 14
 		 * 
@@ -551,9 +621,11 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isPangram(String string) {
-		// TODO Write an implementation for this method declaration
-		return false;
-	}
+        for (char a = 'A'; a <= 'Z'; a++)
+            if ((string.indexOf(a) < 0) && (string.indexOf((char)(a + 32)) < 0))
+                return false;
+        		return true;
+    }
 
 	/**
 	 * 17. Calculate the moment when someone has lived for 10^9 seconds.
@@ -656,6 +728,7 @@ public class EvaluationService {
 	 */
 	public int solveWordProblem(String string) {
 		// TODO Write an implementation for this method declaration
+		
 		return 0;
 	}
 
