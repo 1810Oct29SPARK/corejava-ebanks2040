@@ -1,6 +1,8 @@
 package com.revature.eval.java.core;
 
 import java.lang.reflect.Array;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.time.temporal.Temporal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,7 +37,7 @@ public class EvaluationService {
 	 * @param phrase
 	 * @return
 	 */
-	public static String acronym(String phrase) {
+	public String acronym(String phrase) {
 		// TODO Write an implementation for this method declaration
 		char[] ch = new char[phrase.length()];
 		String acro = " ";		
@@ -140,7 +142,7 @@ public class EvaluationService {
 	 * @return
 	 */
 	//Checked
-	public static int getScrabbleScore(String string) {
+	public int getScrabbleScore(String string) {
 		int p = 0;
 		for (int i = 0; i < string.length(); i++) {
 			switch (string.toUpperCase().charAt(i)) {
@@ -213,23 +215,7 @@ public class EvaluationService {
 	 */
 	public static String cleanPhoneNumber(String string) {
 
-			if(string.length() != 11)
-			{
-				
-			}
-			for(int i = 0; i < string.length();i++)
-			{
-				
-			}
-			string = string.replaceAll("\\s","");
-			string = string.replaceAll("[^\\d.]", "");
-			if(string.charAt(0) == '1')
-			string = string.replaceFirst("1", "");
-			
-			//Do some research on throws and use that throw thing
-			//Santize for when user inputs more than the
-			System.out.println(string);
-		return string;
+		return null;
 	}
 
 	/**
@@ -336,7 +322,7 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
-	public static String toPigLatin(String string) {
+	public String toPigLatin(String string) {
 	    char a = 'a';
 	    char e = 'e';
 	    char i = 'i';
@@ -349,7 +335,7 @@ public class EvaluationService {
 	    for(int p = 0; p < end; p++) {
 	        char c = Character.toLowerCase(string.charAt(p));
 	        if(c == a || c == e || c == i || c == o || c == u) {
-	            firstVowel = i;
+	            firstVowel = p;
 	            break;
 	        }
 	    }
@@ -377,7 +363,7 @@ public class EvaluationService {
 	 * @return
 	 */
 	//Checked
-	public static boolean isArmstrongNumber(int input) {
+	public boolean isArmstrongNumber(int input) {
 	    String number = String.valueOf(input);
 	    char[] numDigits = number.toCharArray();
 
@@ -630,8 +616,8 @@ public class EvaluationService {
 	 * @return
 	 */
 	public Temporal getGigasecondDate(Temporal given) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		return given.plus(1_000_000_000, ChronoUnit.SECONDS);
+
 	}
 
 	/**
@@ -689,9 +675,29 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isLuhnValid(String string) {
-		// TODO Write an implementation for this method declaration
-		return false;
-	}
+        int sum = 0;
+        String luhn = "";
+        luhn = string.replaceAll("\\s+","").replaceAll("[^A-Za-z]+", "");
+
+        boolean valid = false;
+        
+        for (int i = string.length() - 1; i >= 0; i--)
+        {
+                int n = Integer.parseInt(string.substring(i, i + 1));
+                if (valid)
+                {
+                        n *= 2;
+                        if (n > 9)
+                        {
+                                n = (n % 10) + 1;
+                        }
+                }
+                sum += n;
+                valid = !valid;
+        }
+        return (sum % 10 == 0);
+}
+	
 
 	/**
 	 * 20. Parse and evaluate simple math word problems returning the answer as an
