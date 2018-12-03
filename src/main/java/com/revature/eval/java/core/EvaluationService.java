@@ -337,34 +337,28 @@ public class EvaluationService {
 	 * @return
 	 */
 	public static String toPigLatin(String string) {
-		// TODO Write an implementation for this method declaration
-		char[] pigLatin = new char[string.length() + 2];
-		
-		String[] piggys = string.split(" ");
-		for(int i =0; i <piggys.length;i++)
-		{
-			int j = 0;
-			while(j<piggys[i].length())
-			{
-				if(piggys[i].charAt(j) == 'a')
-				{
-					
-				}
-				else
-				{
-					if(true) {
-						
-					}
-					else {
-						
-					}
-				}
-			}
-		}			
-		pigLatin[string.length()] = 'a';
-		pigLatin[string.length() + 1] = 'y';
-		System.out.println(new String(pigLatin));
-		return new String(pigLatin);
+	    char a = 'a';
+	    char e = 'e';
+	    char i = 'i';
+	    char o = 'o';
+	    char u = 'u';
+
+	    int start = 0;
+	    int firstVowel = 0;
+	    int end = string.length();
+	    for(int p = 0; p < end; p++) {
+	        char c = Character.toLowerCase(string.charAt(p));
+	        if(c == a || c == e || c == i || c == o || c == u) {
+	            firstVowel = i;
+	            break;
+	        }
+	    }
+	    if(start != firstVowel) {
+	        String startString = string.substring(firstVowel, end);
+	        String endString = string.substring(start, firstVowel) + "ay";
+	        return startString+endString;
+	    }
+	    return string;
 	}
 
 	/**
